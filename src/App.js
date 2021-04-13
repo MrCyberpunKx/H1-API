@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import ListaDeSignos from './Componentes/ListaDeSignos';
 
 function App() {
+  const [item, setItem] = useState('');
+  const [itemList, setItemList] = useState([]);
+  const addItem = () => {
+    setItemList([item].concat(itemList))
+    setItem('')
+  }
   return (
-    <ListaDeSignos />
+    <div className="App">
+      <h1>Lista de Compras</h1>
+      <input type="text" placeholder="Item" value={item} name="item" onChange = {e => setItem(e.target.value)} />
+      <button onClick={addItem}>Adicionar Item</button>
+      <ul>
+      {itemList.map((item) => (
+          <li>{item}</li>
+      ))}
+      </ul>
+    </div>
   );
 }
 
